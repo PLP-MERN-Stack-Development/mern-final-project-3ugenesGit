@@ -1,52 +1,65 @@
-# MERN Stack Capstone Project
+# WasteWise ♻️ – MERN Waste Management Platform
 
-This assignment focuses on designing, developing, and deploying a comprehensive full-stack MERN application that showcases all the skills you've learned throughout the course.
+WasteWise is a full MERN-stack experience for reporting waste hotspots, rewarding community clean-ups, and providing admins a live command center. It combines Web3Auth, Lit Protocol encryption, IPFS storage, Mapbox visualizations, and a gamified reward system powered by the on-chain RWT (Reward Token).
 
-## Assignment Overview
+## Highlights
+- **Secure Auth**: Email/password + Web3Auth (id token verification).
+- **Encrypted Reports**: Payloads encrypted with Lit Protocol and pinned to IPFS (with mock fallback for local dev).
+- **Map Intelligence**: Mapbox map displaying hotspots, community submissions, and status filters.
+- **Rewards Engine**: Dynamic RWT calculations, daily streaks, XP-based leveling, and weekly lottery draws (cron job + Sign Protocol attestations).
+- **Realtime UX**: Notifications drawer, offline queue with auto-sync, push-permission prompts, leaderboard, achievements, QR scan flow for collectors, dark mode, and multi-language (EN/FR/ES).
+- **Admin Ops**: Verify/reject reports, assign collectors, track analytics/logs, trigger lotteries.
+- **Smart Contracts**: Hardhat project with ERC-20-style RewardToken + scripts.
+- **Testing**: Node built-in tests (reward logic) + Vitest for Redux slices.
 
-You will:
-1. Plan and design a full-stack MERN application
-2. Develop a robust backend with MongoDB, Express.js, and Node.js
-3. Create an interactive frontend with React.js
-4. Implement testing across the entire application
-5. Deploy the application to production
+## Project Structure
+```
+backend/   # Express API, Mongo models, services (Lit, IPFS, Sign, rewards, notifications)
+frontend/  # React + Vite + Tailwind, Redux store, React Query hooks, Mapbox UI
+contracts/ # Hardhat project + RewardToken.sol and deploy script
+docs/      # Setup, API reference, deployment + testing guides
+env.example
+```
 
-## Getting Started
+## Quick Start
+```bash
+# Backend
+cd backend
+cp ../env.example .env.development
+npm install
+npm run dev
 
-1. Accept the GitHub Classroom assignment
-2. Clone the repository to your local machine
-3. Follow the instructions in the `Week8-Assignment.md` file
-4. Plan, develop, and deploy your capstone project
+# Frontend
+cd frontend
+cp ../env.example .env
+npm install
+npm run dev
+```
+Visit `http://localhost:5173` (API proxied to `http://localhost:5000/api`).
 
-## Files Included
+For detailed setup, deployment, and testing instructions see:
+- [`docs/SETUP.md`](docs/SETUP.md)
+- [`docs/API.md`](docs/API.md)
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
+- [`docs/TESTING.md`](docs/TESTING.md)
 
-- `Week8-Assignment.md`: Detailed assignment instructions
+## Testing
+```bash
+cd backend && npm run test   # node --test suite
+cd frontend && npm run test  # vitest
+```
 
-## Requirements
+## Smart Contract Deployment
+```bash
+cd contracts
+cp env.example .env
+npm install
+npm run deploy:sepolia
+```
+Update `REWARD_TOKEN_ADDRESS` after deployment.
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git and GitHub account
-- Accounts on deployment platforms (Render/Vercel/Netlify/etc.)
-
-## Project Ideas
-
-The `Week8-Assignment.md` file includes several project ideas, but you're encouraged to develop your own idea that demonstrates your skills and interests.
-
-## Submission
-
-Your project will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
-
-1. Commit and push your code regularly
-2. Include comprehensive documentation
-3. Deploy your application and add the live URL to your README.md
-4. Create a video demonstration and include the link in your README.md
-
-## Resources
-
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [GitHub Classroom Guide](https://docs.github.com/en/education/manage-coursework-with-github-classroom) 
+## Future Enhancements
+- Production-grade push notifications (FCM/Web Push)
+- Collector mobile/PWA for QR verification
+- Detailed analytics dashboards + exports
+- Expanded test coverage (controllers, hooks, UI)
