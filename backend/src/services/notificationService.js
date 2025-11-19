@@ -1,6 +1,6 @@
-const Notification = require('../models/Notification');
+import Notification from '../models/Notification.js';
 
-exports.notifyUser = async ({ userId, title, body, category = 'system', metadata }) => {
+export const notifyUser = async ({ userId, title, body, category = 'system', metadata }) => {
   return Notification.create({
     user: userId,
     title,
@@ -10,11 +10,11 @@ exports.notifyUser = async ({ userId, title, body, category = 'system', metadata
   });
 };
 
-exports.listForUser = async (userId) => {
+export const listForUser = async (userId) => {
   return Notification.find({ user: userId }).sort('-createdAt').limit(50);
 };
 
-exports.markAsRead = async ({ userId, notificationId }) => {
+export const markAsRead = async ({ userId, notificationId }) => {
   const notification = await Notification.findOneAndUpdate(
     { _id: notificationId, user: userId },
     { read: true },

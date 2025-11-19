@@ -1,14 +1,14 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-const compression = require('compression');
-const cookieParser = require('cookie-parser');
-const fileUpload = require('express-fileupload');
-const config = require('./config/env');
-const routes = require('./routes');
-const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import rateLimit from 'express-rate-limit';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import fileUpload from 'express-fileupload';
+import config from './config/env.js';
+import routes from './routes/index.js';
+import { notFound, errorHandler } from './middlewares/errorMiddleware.js';
 
 const app = express();
 
@@ -52,5 +52,5 @@ app.use('/api', routes);
 app.use(notFound);
 app.use(errorHandler);
 
-module.exports = app;
+export default app;
 

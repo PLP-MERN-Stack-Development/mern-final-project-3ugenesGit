@@ -1,8 +1,8 @@
-const { LitNodeClient } = require('@lit-protocol/lit-node-client');
-const { encryptString } = require('@lit-protocol/encryption');
-const crypto = require('crypto');
-const config = require('../config/env');
-const logger = require('../config/logger');
+import { LitNodeClient } from '@lit-protocol/lit-node-client';
+import { encryptString } from '@lit-protocol/encryption';
+import crypto from 'crypto';
+import config from '../config/env.js';
+import logger from '../config/logger.js';
 
 let litClient = null;
 let ready = false;
@@ -31,7 +31,7 @@ const ensureConnected = async () => {
   return true;
 };
 
-exports.encryptReport = async ({ data, accessControlConditions }) => {
+export const encryptReport = async ({ data, accessControlConditions }) => {
   try {
     const connected = await ensureConnected();
     if (!connected) {

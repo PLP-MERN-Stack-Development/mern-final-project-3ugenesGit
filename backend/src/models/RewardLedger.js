@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const rewardLedgerSchema = new mongoose.Schema(
   {
@@ -21,5 +21,5 @@ const rewardLedgerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('RewardLedger', rewardLedgerSchema);
+export default mongoose.model('RewardLedger', rewardLedgerSchema);
 

@@ -1,10 +1,10 @@
-const cron = require('node-cron');
-const lotteryService = require('../services/lotteryService');
-const logger = require('../config/logger');
+import cron from 'node-cron';
+import * as lotteryService from '../services/lotteryService.js';
+import logger from '../config/logger.js';
 
 let task;
 
-const startLotteryJob = () => {
+export const startLotteryJob = () => {
   if (task) {
     return task;
   }
@@ -25,5 +25,4 @@ const startLotteryJob = () => {
   return task;
 };
 
-module.exports = { startLotteryJob };
 

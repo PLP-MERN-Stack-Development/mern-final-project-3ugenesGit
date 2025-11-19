@@ -1,6 +1,6 @@
-const { SignProtocolClient, SpMode } = require('@ethsign/sp-sdk');
-const config = require('../config/env');
-const logger = require('../config/logger');
+import { SignProtocolClient, SpMode } from '@ethsign/sp-sdk';
+import config from '../config/env.js';
+import logger from '../config/logger.js';
 
 let client = null;
 
@@ -16,7 +16,7 @@ if (config.signProtocolApiKey) {
   logger.warn('SIGN_PROTOCOL_API_KEY missing. Attestations will be mocked.');
 }
 
-exports.attestActivity = async (payload) => {
+export const attestActivity = async (payload) => {
   if (!client) {
     return {
       attestationId: `mock-attestation-${Date.now()}`,

@@ -1,7 +1,7 @@
-const fs = require('fs');
-const sharp = require('sharp');
-const logger = require('../config/logger');
-const ipfsService = require('./ipfsService');
+import fs from 'fs';
+import sharp from 'sharp';
+import logger from '../config/logger.js';
+import * as ipfsService from './ipfsService.js';
 
 const bufferFromUpload = async (file) => {
   if (file.data) {
@@ -27,7 +27,7 @@ const optimiseBuffer = async (inputBuffer) => {
   return sharp(inputBuffer).rotate().resize(1600, null, { fit: 'inside' }).jpeg({ quality: 80 }).toBuffer();
 };
 
-exports.handleUpload = async (file) => {
+export const handleUpload = async (file) => {
   if (!file) return null;
   const rawBuffer = await bufferFromUpload(file);
   const optimised = await optimiseBuffer(rawBuffer);
@@ -41,7 +41,7 @@ exports.handleUpload = async (file) => {
   };
 };
 
-exports.handleDataUrl = async (dataUrl) => {
+export const handleDataUrl = async (dataUrl) => {
   if (!dataUrl) return null;
   const { buffer, mimeType } = bufferFromDataUrl(dataUrl);
   const optimised = await optimiseBuffer(buffer);
@@ -54,7 +54,7 @@ exports.handleDataUrl = async (dataUrl) => {
   };
 };
 
-exports.cleanupTempFile = async (file) => {
+export const cleanupTempFile = async (file) => {
   if (file?.tempFilePath) {
     try {
       await fs.promises.unlink(file.tempFilePath);

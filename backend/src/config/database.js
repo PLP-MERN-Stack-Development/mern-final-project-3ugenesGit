@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const config = require('./env');
+import mongoose from 'mongoose';
+import config from './env.js';
 
 mongoose.set('strictQuery', true);
 
-const connectDatabase = async () => {
+export const connectDatabase = async () => {
   try {
     await mongoose.connect(config.mongoUri, {
       autoIndex: config.nodeEnv !== 'production',
@@ -15,5 +15,4 @@ const connectDatabase = async () => {
   }
 };
 
-module.exports = { connectDatabase };
 

@@ -1,5 +1,5 @@
-const path = require('path');
-const dotenv = require('dotenv');
+import path from 'path';
+import dotenv from 'dotenv';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env' : `.env.${process.env.NODE_ENV || 'development'}`;
 
@@ -57,5 +57,5 @@ for (const key of requiredKeys) {
   }
 }
 
-module.exports = config;
+export default config;
 

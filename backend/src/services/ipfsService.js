@@ -1,6 +1,6 @@
-const { create } = require('ipfs-http-client');
-const config = require('../config/env');
-const logger = require('../config/logger');
+import { create } from 'ipfs-http-client';
+import config from '../config/env.js';
+import logger from '../config/logger.js';
 
 let client = null;
 
@@ -29,7 +29,7 @@ const pinData = async (payload) => {
   return cid.toString();
 };
 
-exports.pinJson = async (data) => {
+export const pinJson = async (data) => {
   try {
     return await pinData(JSON.stringify(data));
   } catch (error) {
@@ -38,7 +38,7 @@ exports.pinJson = async (data) => {
   }
 };
 
-exports.pinFile = async (buffer) => {
+export const pinFile = async (buffer) => {
   try {
     return await pinData(buffer);
   } catch (error) {

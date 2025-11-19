@@ -1,5 +1,5 @@
-const LotteryEntry = require('../models/LotteryEntry');
-const RewardLedger = require('../models/RewardLedger');
+import LotteryEntry from '../models/LotteryEntry.js';
+import RewardLedger from '../models/RewardLedger.js';
 
 const getWeekStart = (date = new Date()) => {
   const d = new Date(date);
@@ -10,12 +10,12 @@ const getWeekStart = (date = new Date()) => {
   return d;
 };
 
-exports.createEntry = async ({ userId, reportId, weight }) => {
+export const createEntry = async ({ userId, reportId, weight }) => {
   const weekOf = getWeekStart();
   return LotteryEntry.create({ user: userId, report: reportId, weekOf, weight });
 };
 
-exports.pickWinners = async ({ weekOf = getWeekStart(), winners = 3 }) => {
+export const pickWinners = async ({ weekOf = getWeekStart(), winners = 3 }) => {
   const entries = await LotteryEntry.find({ weekOf });
   if (!entries.length) return [];
 

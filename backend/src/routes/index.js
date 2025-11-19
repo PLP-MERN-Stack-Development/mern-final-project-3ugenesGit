@@ -1,9 +1,9 @@
-const express = require('express');
-const authRoutes = require('./authRoutes');
-const reportRoutes = require('./reportRoutes');
-const rewardRoutes = require('./rewardRoutes');
-const adminRoutes = require('./adminRoutes');
-const notificationRoutes = require('./notificationRoutes');
+import express from 'express';
+import authRoutes from './authRoutes.js';
+import reportRoutes from './reportRoutes.js';
+import rewardRoutes from './rewardRoutes.js';
+import adminRoutes from './adminRoutes.js';
+import notificationRoutes from './notificationRoutes.js';
 
 const router = express.Router();
 
@@ -13,5 +13,5 @@ router.use('/rewards', rewardRoutes);
 router.use('/admin', adminRoutes);
 router.use('/notifications', notificationRoutes);
 
-module.exports = router;
+export default router;
 

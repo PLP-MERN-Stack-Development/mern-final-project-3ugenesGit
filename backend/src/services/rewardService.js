@@ -1,7 +1,7 @@
-const RewardLedger = require('../models/RewardLedger');
-const User = require('../models/User');
-const WasteReport = require('../models/WasteReport');
-const lotteryService = require('./lotteryService');
+import RewardLedger from '../models/RewardLedger.js';
+import User from '../models/User.js';
+import WasteReport from '../models/WasteReport.js';
+import * as lotteryService from './lotteryService.js';
 
 const BASE_REWARD = 10;
 
@@ -36,7 +36,7 @@ const updateStreak = (streak = {}, submittedAt = new Date()) => {
   return current;
 };
 
-exports.awardReport = async ({ userId, reportId }) => {
+export const awardReport = async ({ userId, reportId }) => {
   const user = await User.findById(userId);
   const report = await WasteReport.findById(reportId);
   const reward = calculateReward({
@@ -63,6 +63,5 @@ exports.awardReport = async ({ userId, reportId }) => {
   return { reward, ledger, streak: user.rewards.streak };
 };
 
-exports.calculateReward = calculateReward;
-exports.updateStreak = updateStreak;
+export { calculateReward, updateStreak };
 

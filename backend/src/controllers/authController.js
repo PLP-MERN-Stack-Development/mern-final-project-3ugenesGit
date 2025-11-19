@@ -1,9 +1,9 @@
-const { validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const config = require('../config/env');
-const web3AuthService = require('../services/web3AuthService');
+import { validationResult } from 'express-validator';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import config from '../config/env.js';
+import * as web3AuthService from '../services/web3AuthService.js';
 
 const signToken = (user) =>
   jwt.sign(
@@ -21,7 +21,7 @@ const sanitizeUser = (user) => {
   return obj;
 };
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -39,7 +39,7 @@ exports.register = async (req, res) => {
   res.status(201).json({ user: sanitizeUser(user), token: signToken(user) });
 };
 
-exports.basicLogin = async (req, res) => {
+export const basicLogin = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -58,7 +58,7 @@ exports.basicLogin = async (req, res) => {
   res.json({ user: sanitizeUser(user), token: signToken(user) });
 };
 
-exports.web3AuthLogin = async (req, res) => {
+export const web3AuthLogin = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

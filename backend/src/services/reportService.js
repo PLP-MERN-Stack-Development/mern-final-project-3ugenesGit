@@ -1,9 +1,9 @@
-const WasteReport = require('../models/WasteReport');
-const rewardService = require('./rewardService');
-const litService = require('./litService');
-const ipfsService = require('./ipfsService');
-const signProtocolService = require('./signProtocolService');
-const notificationService = require('./notificationService');
+import WasteReport from '../models/WasteReport.js';
+import * as rewardService from './rewardService.js';
+import * as litService from './litService.js';
+import * as ipfsService from './ipfsService.js';
+import * as signProtocolService from './signProtocolService.js';
+import * as notificationService from './notificationService.js';
 
 const ACCESS_CONDITIONS = [
   {
@@ -19,7 +19,7 @@ const ACCESS_CONDITIONS = [
   },
 ];
 
-exports.createReport = async ({ user, payload }) => {
+export const createReport = async ({ user, payload }) => {
   const plainData = JSON.stringify(payload);
   const encrypted = await litService.encryptReport({
     data: plainData,
@@ -71,7 +71,7 @@ exports.createReport = async ({ user, payload }) => {
   return { report, reward };
 };
 
-exports.updateStatus = async ({ reportId, status, collector }) => {
+export const updateStatus = async ({ reportId, status, collector }) => {
   const report = await WasteReport.findById(reportId);
   if (!report) throw new Error('Report not found');
   report.status = status;
@@ -91,7 +91,7 @@ exports.updateStatus = async ({ reportId, status, collector }) => {
   return report;
 };
 
-exports.listReports = async (filters = {}) => {
+export const listReports = async (filters = {}) => {
   const query = {};
   if (filters.userId) {
     query.user = filters.userId;

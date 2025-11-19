@@ -1,6 +1,6 @@
-const pino = require('pino');
-const pretty = require('pino-pretty');
-const config = require('./env');
+import pino from 'pino';
+import pretty from 'pino-pretty';
+import config from './env.js';
 
 const stream = config.nodeEnv === 'development'
   ? pretty({
@@ -17,5 +17,5 @@ const logger = pino(
   stream
 );
 
-module.exports = logger;
+export default logger;
 

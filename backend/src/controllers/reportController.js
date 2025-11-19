@@ -1,6 +1,6 @@
-const { validationResult } = require('express-validator');
-const reportService = require('../services/reportService');
-const mediaService = require('../services/mediaService');
+import { validationResult } from 'express-validator';
+import * as reportService from '../services/reportService.js';
+import * as mediaService from '../services/mediaService.js';
 
 const parseJsonField = (value) => {
   if (!value) return null;
@@ -14,7 +14,7 @@ const parseJsonField = (value) => {
   return value;
 };
 
-exports.create = async (req, res) => {
+export const create = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -57,12 +57,12 @@ exports.create = async (req, res) => {
   res.status(201).json(result);
 };
 
-exports.mine = async (req, res) => {
+export const mine = async (req, res) => {
   const reports = await reportService.listReports({ userId: req.user._id });
   res.json(reports);
 };
 
-exports.list = async (req, res) => {
+export const list = async (req, res) => {
   const reports = await reportService.listReports({
     status: req.query.status,
     category: req.query.category,
@@ -70,7 +70,7 @@ exports.list = async (req, res) => {
   res.json(reports);
 };
 
-exports.feed = async (req, res) => {
+export const feed = async (req, res) => {
   const reports = await reportService.listReports({ status: 'verified', limit: 200 });
   const sanitized = reports.map((report) => ({
     _id: report._id,
@@ -84,7 +84,7 @@ exports.feed = async (req, res) => {
   res.json(sanitized);
 };
 
-exports.updateStatus = async (req, res) => {
+export const updateStatus = async (req, res) => {
   const { status, collector } = req.body;
   const updated = await reportService.updateStatus({
     reportId: req.params.id,

@@ -1,10 +1,10 @@
-const http = require('http');
-const { Server } = require('socket.io');
-const app = require('./app');
-const config = require('./config/env');
-const { connectDatabase } = require('./config/database');
-const logger = require('./config/logger');
-const { startLotteryJob } = require('./jobs/lotteryJob');
+import http from 'http';
+import { Server } from 'socket.io';
+import app from './app.js';
+import config from './config/env.js';
+import { connectDatabase } from './config/database.js';
+import logger from './config/logger.js';
+import { startLotteryJob } from './jobs/lotteryJob.js';
 
 const server = http.createServer(app);
 const io = new Server(server, {

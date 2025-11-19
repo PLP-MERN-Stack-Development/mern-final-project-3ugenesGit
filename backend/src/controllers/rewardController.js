@@ -1,7 +1,7 @@
-const RewardLedger = require('../models/RewardLedger');
-const lotteryService = require('../services/lotteryService');
+import RewardLedger from '../models/RewardLedger.js';
+import * as lotteryService from '../services/lotteryService.js';
 
-exports.summary = async (req, res) => {
+export const summary = async (req, res) => {
   const ledgers = await RewardLedger.find({ user: req.user._id }).sort('-createdAt');
   const ledgerTotal = ledgers.reduce((sum, entry) => sum + entry.amount, 0);
   const overview = {
@@ -14,7 +14,7 @@ exports.summary = async (req, res) => {
   res.json({ overview, ledgers });
 };
 
-exports.pickWinners = async (req, res) => {
+export const pickWinners = async (req, res) => {
   const winners = await lotteryService.pickWinners({});
   res.json({ winners });
 };

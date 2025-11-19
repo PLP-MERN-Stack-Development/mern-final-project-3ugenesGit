@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const lotteryEntrySchema = new mongoose.Schema(
   {
@@ -17,5 +17,5 @@ const lotteryEntrySchema = new mongoose.Schema(
 
 lotteryEntrySchema.index({ user: 1, weekOf: 1 }, { unique: false });
 
-module.exports = mongoose.model('LotteryEntry', lotteryEntrySchema);
+export default mongoose.model('LotteryEntry', lotteryEntrySchema);
 

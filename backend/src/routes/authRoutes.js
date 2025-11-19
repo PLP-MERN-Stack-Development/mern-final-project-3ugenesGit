@@ -1,7 +1,7 @@
-const express = require('express');
-const { body } = require('express-validator');
-const authController = require('../controllers/authController');
-const asyncHandler = require('../utils/asyncHandler');
+import express from 'express';
+import { body } from 'express-validator';
+import * as authController from '../controllers/authController.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
 const router = express.Router();
 
@@ -27,5 +27,5 @@ router.post(
   asyncHandler(authController.register)
 );
 
-module.exports = router;
+export default router;
 

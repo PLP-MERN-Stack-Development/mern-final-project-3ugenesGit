@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/env');
-const User = require('../models/User');
+import jwt from 'jsonwebtoken';
+import config from '../config/env.js';
+import User from '../models/User.js';
 
-const authMiddleware = async (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -22,12 +22,11 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-const adminOnly = (req, res, next) => {
+export const adminOnly = (req, res, next) => {
   if (req.user?.role !== 'admin') {
     return res.status(403).json({ message: 'Admins only' });
   }
   next();
 };
 
-module.exports = { authMiddleware, adminOnly };
 

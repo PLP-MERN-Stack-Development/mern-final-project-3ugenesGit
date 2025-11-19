@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const locationSchema = new mongoose.Schema(
   {
@@ -52,5 +52,5 @@ const wasteReportSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('WasteReport', wasteReportSchema);
+export default mongoose.model('WasteReport', wasteReportSchema);
 
